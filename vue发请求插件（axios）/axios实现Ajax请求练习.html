@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>axios实现Ajax请求练习</title>
+		<script type="text/javascript" src="JS/vue.js"></script>
+		<script type="text/javascript" src="JS/vue-router.js"></script>
+		<script type="text/javascript" src="JS/axios.js"></script>
+	</head>
+	<body>
+		<!-- axios发送GET头请求。这个验证文件是我自己写的一个user.json文件 -->
+		<!-- <div id="box">
+			<test-name></test-name>
+		</div>
+		<script>
+			var testName = {
+				data:function(){
+					return {
+						test:'',
+						info:'',
+						fcolor:''
+					}
+				},
+				template:`
+				<div>
+						<h1>检测用户名</h1>
+					<form>	
+						用户名：<input v-model="test"></input>
+						<span :style="{backgroundColor:fcolor}">{{info}}</span> 
+					</form>
+				</div>`,
+				watch:{
+					test:function(val){
+						axios({
+							method:'get',
+							url:'user.json'
+						}).then(function(res){
+							var nameArr = res.data;//获取相应数据
+							console.log(res.data)
+							var result = true;//定义变量
+							for (var i = 0; i < nameArr.length; i++) {
+								if(nameArr[i].name == val){//判断用户是否已经存在
+									result = false;//为变量重新赋值
+									break;
+								}
+							}
+							if(!result){//用户名已经存在
+								this.info = '该用户名已存在！'
+								this.fcolor = 'red';
+							}else{
+								this.info = '恭喜，该用户名未被使用！'
+								this.fcolor = 'green';
+							}
+						}.bind(this)).catch(function(err){
+							console.log(err)
+						})
+					}
+				}
+			}
+			new Vue({
+				el:"#box",
+				components:{
+					'testName':testName
+				}
+			})
+		</script> -->
+		
+		<!-- axios发送POST体请求,我自己用php写了一个接收POST请求的文件（search.php）。
+		想要看效果，去qq群下载XAMPP软件，配置一下项目来看效果。。。-->
+		<!-- <div id="box">
+			<login-component></login-component>
+		</div>
+		<script>
+			var comPo = {
+				data:function(){
+					return {
+						username:"",
+						password:""
+					}
+				},
+				template:`
+				<div>
+					<h1>用户登录</h1>
+					<form>
+						用户名：<input type="text" v-model="username"/><br>
+						密码：&nbsp&nbsp&nbsp<input type="password" v-model="password"/><br>
+						<input type="button" value="登录" @click="login(username,password)"/>
+						<input type="button" value="重置" @click="remove"/>
+					</form>
+				</div>`,
+				methods:{
+					login:function(user,pwds){
+						if(!user || !pwds){
+							alert("请输入用户名，密码！");
+						}else{
+							axios({
+								method:'post', 
+								url:'search.php',//请求服务器url 
+								//向服务器传递的参数，推荐用这种方式传递参数
+								data:`username=${user}&pwd=${pwds}`
+							}).then(function(res){
+								if(res.data){//根据服务器返回的响应判断登录结果
+									alert("登录成功！")
+									alert(`服务器接收到要验证的用户名：${res.data.username},服务器接收到要验证的密码：${res.data.password}`)
+								}else{
+									alert("登录失败！")
+								}
+							}.bind(this)).catch(function(err){
+								alert(err)
+							})
+						}
+					},
+					remove:function(){
+						this.username = "";
+						this.password = ""
+					}
+				}
+			}
+			var vm = new Vue({
+				components:{
+					'loginComponent':comPo
+				}
+			}).$mount('#box')
+		</script> -->
+	</body>
+</html>

@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<title>VUE过渡练习</title>
+	<script type="text/javascript" src="JS/vue.js"></script>
+</head>
+<body>
+	<!-- 自己随便写的，主要是style里面的几个类比较重要 -->
+	<div id="box">
+		<carouselmap></carouselmap>
+	</div>
+	<style>
+		.carousel-leave-active,.carousel-enter-active{
+			transition: all .3s ease; 
+		}
+		.carousel-leave-to{
+			transform:  translateX(-200px);
+			opacity: 1;
+		}
+		.carousel-enter{
+			transform:  translateX(200px);
+			opacity: 1;
+		}
+		.carousel-enter-to{
+			transform:  translateX(0px);
+			opacity: 1;
+		}
+	</style>
+	<script>
+		var CarouselMap = {
+			data:function(){
+				return {
+					active:'oneimg',
+					imgArr:['oneimg','twoimg','threeimg'],
+					index:0,
+					time:''
+				}
+			},
+			methods:{
+				activeNow:function(val){
+					var data = this;
+					this.index = val;
+					this.time = setInterval(function(){
+						if(data.index > 2){
+							data.index = 0;
+							data.active = data.imgArr[data.index]
+						}else{
+							data.active = data.imgArr[data.index]
+						}
+						data.index += 1;
+					},3000);
+				},
+				pointActive:function(val){
+					this.active = val;
+					clearInterval(this.time)
+				},
+				pointOut:function(val){
+					this.activeNow(val);
+				}
+			},
+			mounted:function(){
+				this.activeNow(0);
+			},
+			template:`
+			<div>
+				<div style="position: relative;overflow: hidden;width: 200px;height: 200px;">
+					<transition name='carousel' >
+						<component :is='active'></component>
+					</transition>
+				</div>
+				<span style="padding:0px 5px;margin-left:30px;background-color: #000000;border-radius: 50%;color: white;" v-on:mouseenter="pointActive('oneimg')" v-on:mouseout="pointOut(0)">1</span>
+				<span style="padding:0px 5px;margin-left:30px;background-color: #000000;border-radius: 50%;color: white;"v-on:mouseenter="pointActive('twoimg')" v-on:mouseout="pointOut(1)">2</span>
+				<span style="padding:0px 5px;margin-left:30px;background-color: #000000;border-radius: 50%;color: white;"v-on:mouseenter="pointActive('threeimg')" v-on:mouseout="pointOut(2)">3</span>
+			</div>`,
+			components:{
+				oneimg:{
+					template:`<div style="position: absolute;width: 200px;height: 200px;background-color: red;text-align: center;">第一张图</div>`
+				},
+				twoimg:{
+					template:`<div style="position: absolute;width: 200px;height: 200px;background-color: green;text-align: center;">第二张图</div>`
+				},
+				threeimg:{
+					template:`<div style="position: absolute;width: 200px;height: 200px;background-color: blue;text-align: center;">第三张图</div>`
+				}
+			}
+		}
+		var vm=new Vue({
+			el:"#box",
+			components:{
+				carouselmap:CarouselMap
+			}
+		})
+	</script>
+	
+</body>
+</html> 
