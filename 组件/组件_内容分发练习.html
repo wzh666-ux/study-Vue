@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<title>内容分发练习</title>
+	<script type="text/javascript" src="JS/vue.js"></script>
+</head>
+<body>
+	<!-- 组件具名插槽 -->
+	<!-- <div id="box">
+		<myslot>
+			<template v-slot:as>{{a}}</template>
+			<template v-slot:bs>{{b}}</template>
+		</myslot>
+	</div>
+	<script>
+		var comPo = {
+			props:[],
+			template:`<div>
+			<slot>wzh</slot>
+			<slot name="as"></slot>
+			<slot name="bs"></slot>
+			</div>`
+		}
+		var vm = new Vue({
+			el:"#box",
+			data:{
+				a:'hello',
+				b:'world!'
+			},
+			components:{
+				'myslot':comPo
+			}
+		})
+	</script> -->
+	
+	<!-- 子组件向父组件传数据(伪数据传输) -->
+	<!-- <div id="box">
+		<mycompo>
+			<template v-slot:default="slotProps">
+				商品信息：{{slotProps.shop}}{{slotProps.value}}<br>
+			</template>
+		</mycompo>
+	</div>
+	<script>
+		var comPo = {
+			template:`<div>
+			<slot :shop="shop" :value="value"></slot>
+			<slot :value="value"></slot>
+			</div>`, 
+			data:function(){
+				return {
+					shop:'RROT ',
+					value:'$299'
+				}
+			}
+		}
+		var vm = new Vue({
+			el:"#box",
+			components:{
+				'mycompo':comPo
+			}
+		})
+	</script> -->
+	
+	<!-- 一种特殊的组件内容分发用法 -->
+	<!-- <div id="box">
+		<mycomponent :user = "user">
+			<template v-slot:default="users">
+				<span>{{user[users.index].id}}</span>
+				<span>{{user[users.index].name}}</span>
+			</template>
+		</mycomponent>
+	</div>
+	<script>
+		var comPo = {
+			props:{
+				user:Array
+			},
+			template:`<div>
+				<div v-for='(item,index) in user'>
+					<slot :index="index"></slot>
+				</div>
+			</div>`
+		}
+		var vm = new Vue({
+			el:"#box",
+			data:{
+				user:[
+					{id:1,name:"a"},
+					{id:2,name:"b"},
+					{id:3,name:"c"},
+					{id:4,name:"d"},
+					{id:5,name:"e"}
+				]
+			},
+			components:{
+				'mycomponent':comPo
+			}
+		})
+	</script> -->
+	
+</body>
+</html>

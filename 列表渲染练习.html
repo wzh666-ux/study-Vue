@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>列表渲染练习</title>
+    <script type="text/javascript" src="JS/vue.js"></script>
+</head>
+<body>
+	<!-- v-for指令的单循环使用 -->
+    <div id="box">
+        <ul>
+            <template v-for="(item,index) in itemlist">
+                <li class="item">{{index+1}}-{{item}}</li>
+                
+            </template>
+        </ul>
+    </div>
+    <script>
+        var XF = new Array();
+        for(var i = 0;i < 15;i++){
+            XF[i] = new Array();
+            for(var j = 0;j < i+1  ;j++){
+                XF[i][j] = "*"
+            }
+        }
+        var vm = new Vue({
+            el:"#box",
+            data:{
+                itemlist:XF
+            }
+        })
+    </script>
+	<!-- v-for指令的双循环使用 -->
+    <div id="box1">
+        <div v-for="(i,index) in 10">
+            {{index+1}}--
+            <span v-for="j in i">
+                {{"*"}}
+            </span>
+        </div>
+    </div>
+    <script>
+        var vm1 = new Vue({
+            el:"#box1"
+        })
+    </script>
+    <!-- 自己随便做的。。。 -->
+    <div id="box2">
+        <h1>成绩表</h1>
+        <label>姓名：</label><span>{{name}}</span>
+        <label>年龄：</label><span>{{age}}</span>
+        <label>性别：</label><span>{{sex}}</span>
+        <div class="report">
+            <div class="title">
+                <span>学期</span>
+                <span>数学</span>
+                <span>物理</span>
+                <span>化学</span>
+                <span>英语</span>
+                <span>计算机</span>
+                <span>总分</span>
+            </div>
+            <div class="content" >
+                <div v-for="(item,index) in items">
+                    <span>{{item.ground}}</span>
+                    <span v-for="scores in item.score">{{scores}}</span>
+                    <span>{{total(index)}}</span>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <script>
+        var vm2 = new Vue({
+            el:"#box2",
+            data:{
+                name:"张无忌",
+                age:"20",
+                sex:"男",
+                items:[
+                    {
+                    ground:"第一学期",
+                    score:[1,2,3]},
+                    {
+                    ground:"第二学期",
+                    score:[]}
+                ]  
+            },
+            methods:{
+                total:function(index){
+                    var total = 0;
+                    var obj = this.items[index].score;
+                    for (const i in obj) {
+                        total += obj[i];
+                    }
+                    return total;
+                }
+            }
+        })
+    </script>
+    
+</body>
+</html>

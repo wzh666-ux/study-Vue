@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<title></title>
+	<script type="text/javascript" src="JS/vue.js"></script>
+</head>
+<body>
+	<div id="box">
+		十进制：<input type="text" v-model="a"/><p>
+		二进制：<span v-for="item in Buffer">{{item}}</span>
+	</div>
+	<script>
+		new Vue({
+			el:"#box",
+			data:{
+				a:0,
+				Buffer:[0]
+			},
+			watch:{
+				a:function(val){
+					var number = val;
+					var ys = 0;
+					var bcs = 2;
+					var Buffer = new Array();
+					while(bcs > 0){
+						ys = number % 2;
+						bcs = parseInt(number / 2);
+						number = bcs;
+						Buffer.push(ys)
+					}
+					Buffer.reverse()
+					this.Buffer = Buffer;
+				}
+			}
+		})
+	</script>
+	
+</body>
+</html>

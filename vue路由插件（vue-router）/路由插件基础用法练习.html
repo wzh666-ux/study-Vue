@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<title>路由插件基础用法练习</title>
+	<script type="text/javascript" src="JS/vue.js"></script>
+	<script type="text/javascript" src="JS/vue-router.js"></script>
+</head>
+<body>
+	<!-- 路由插件基础 -->
+	<!-- <div id="box">
+		<p>
+			<router-link to="/first">页面一</router-link>
+			<router-link to="/second">页面二</router-link>
+			<router-link to="/third">页面三</router-link>
+		</p>
+		路由出口，路由匹配到的组件渲染的位置
+		<router-view></router-view>
+	</div>
+	<script>
+		/* 定义要路由的组件3个 */
+		var first = {
+			template:'<div>这是第页面一</div>'
+		}
+		var second = {
+			template:'<div>这是第页面二</div>'
+		}
+		var third = {
+			template:'<div>这是第页面三</div>'
+		}
+		/* 定义路由 */
+		var routes = [
+			{path:'/first',component:first}, 
+			{path:'/second',component:second},
+			{path:'/third',component:third}
+		];
+		/* 创建路由实列，传入routes配置，还可以传入别的配置 */
+		var router = new VueRouter({
+			routes // 相当于routes:routes的缩写
+		});
+		/* 创建和挂载根实列。通过router配置参数注入路由，让整个应用都有路由功能 */
+		var app = new Vue({
+			router
+		}).$mount('#box');
+	</script> -->
+	
+	<!-- 动态路由匹配 -->
+	<!-- <div id="box">
+		<p>
+			<router-link to="/first/137635">点击查看所有用户</router-link>
+		</p>
+		<!-- 路由出口，路由匹配到的组件渲染的位置 -->
+	<!--	<router-view></router-view>  
+	</div>
+	<script>
+		var User = {
+			data:function(){
+				return {
+					studentID:this.$route.params.pathValue
+				}
+			},
+			template:'<div>动态路由接收的值：{{studentID}}</div>'
+		}
+		/* 创建路由实列，传入routes配置，还可以传入别的配置 */
+		var router = new VueRouter({
+			routes:[
+				{
+					path:'/first/:pathValue',
+					component:User
+				}
+			] // 相当于routes:routes的缩写
+		});
+		/* 创建和挂载根实列。通过router配置参数注入路由，让整个应用都有路由功能 */
+		var app = new Vue({
+			el:"#box",
+			router
+		});
+	</script> -->
+	
+	<!-- 嵌套路由的使用 -->
+	<!-- <div id="box">
+		<p>
+			<router-link to="/user">点击查看用户</router-link>
+		</p>
+		<router-view></router-view>
+	</div>
+	<script>
+		var showPassword = {
+			template:`
+			<div>
+				<p>
+					<router-link to="/user/1">点击查看该用户密码</router-link>
+				</p>
+				<router-view></router-view>
+			</div>`
+		}
+		var password = {
+			template:`
+			<div>
+				该用户密码为：{{$route.params.password}}
+			</div>`
+		}
+		var router = new VueRouter({
+			routes:[
+				{path:`/user`,
+				 component:showPassword,
+				 children:[
+					 {path:`/user/:password`,
+					  component:password
+					 }
+				 ]
+				}
+			]
+		})
+		new Vue({
+			el:"#box",
+			router
+		})
+	</script> -->
+	
+	<!-- 应用push()方法定义导航，如：
+		 this.$router.push( '/home' ) 
+		 this.$router.push( {path:'/home'} )
+		 this.$router.push( {name:'user'} )
+		 this.$router.push( {path:'/home',query:{id:2}} )
+		 this.$router.push( {name:'home',params:{id:2}} )-->
+	
+	<!-- 	如果是多视图渲染则给<router-view>标签添加name属性即可。
+			相应的在创建的路由中给component组件创建对象，并传入组件，
+		 在对象中有一个default属性，请合理利用，其他属性均为<router-view>标签
+		 属性name的值。-->
+		 
+	<!-- 路由重定向，只需在创建的路由对象中调用redirect属性即可，
+		 其属性的值，就是要跳转到相应路由的path的值，也可以是命名的路由即，相应
+		 路由属性的name值，如：routes:[{path:'/a',redirect:{name:'b'}},
+									 {path:'/b',name:'b',redirect:'/c'}]-->
+	
+</body>
+</html>

@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Title</title>
+    <script type="text/javascript" src="JS/vue.js"></script>
+</head>
+<body>
+    <div id="box">{{massage}}</div>
+    <script>
+        /* 全局过滤器 */
+        // Vue.filter("massages", function(value){
+        //     return value.substr(0,5)
+        // })
+        
+        
+        var vm = new Vue({
+            el:'#box',
+            data:{
+                massage:'hello,world!'
+            },
+            /* 局部过滤器 */
+            filters:{
+                massages: function(value){
+                    return value.substr(0,5)
+                }
+            }
+        })
+
+
+
+
+    </script>
+    
+</body>
+</html>

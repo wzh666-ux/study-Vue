@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>属性操作练习</title>
+    <style>
+        #box{
+            height: 120px;
+            width: 120px;
+            border: 5px solid black;
+        }
+        .boxs{
+            height: 120px;
+            width: 120px;
+            border: 5px solid red;
+        }
+    </style>
+    <script src="JS/vue.js"></script>
+</head>
+<body>
+    <!--属性绑定以及文本插值  -->
+    <div id="a">
+        <div :class="{boxs:isClass}">这里是文本插值：{{massage}}<br>
+        这里是文本插值表达式：{{number+10}}
+        </div>
+    </div>
+    <script>
+        var vm = new Vue({
+            el:'#a',
+            data:{
+                massage:"yes!!!!!",
+                number:10,
+                isClass:function(){
+                    return true;
+                }
+            }
+        })
+    </script>
+    <!--属性绑定以及插入HTML  -->
+    <div id = "divbox1" >
+        <div :id = "divbox"></div>
+    </div>
+    <div id ="box1">
+        <div v-html="divbox2"></div>
+    </div>
+    <script>
+        var vm = new Vue({
+            el:'#divbox1',
+            data:{
+                divbox:"box" 
+            }
+        })
+        var vm = new Vue({
+            el:'#box1',
+            data:{
+                divbox2:"<h1>Yellllllllllllll!</h1>"
+            }
+        })
+    </script>
+</body>
+</html>

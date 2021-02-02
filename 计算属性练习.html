@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>计算属性练习</title>
+    <script type="text/javascript" src="JS/vue.js"></script>
+</head>
+<body>
+	<div id="box">
+		<div  v-bind:class="Iclass"></div>
+		{{newString}}
+	</div>
+	<script>
+		var vm = new Vue({
+			el:"#box",
+			data:{
+				Iclass:"one",
+				massage:""
+			},
+			computed:{
+				newString:{
+					get:function(){
+						// return this.massage
+						return this.massage + "world!"
+					},
+					set:function(value){
+						this.massage = value
+					}
+				}
+			}
+		})
+		vm.newString = "hello,"
+	</script>
+    
+</body>
+</html>

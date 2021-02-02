@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<title>事件处理练习</title>
+	<script type="text/javascript" src="JS/vue.js"></script>
+</head>
+<body>
+	<!-- v-on指令基础用法，其指令可以简写为@，如@click -->
+	<!-- <div id="box">
+		<div :style="styles" v-on:click="witleWorld('欢迎来到VUE.JS,明日科技！',$event)">
+			{{word}}
+		</div>
+	</div>
+	<script>
+		new Vue({
+			el:"#box",
+			data:{
+				word:"可点击：欢迎来到VUE.JS！",
+				styles:{
+					border:'1px solid red',
+				}
+			},
+			methods:{
+				witleWorld:function(massage,e){
+					e.preventDefault();
+					this.word = "hello,VUE.JS!";
+					console.log(massage)
+				} 
+			}
+		})
+	</script> -->
+	<!-- 自己随便做的 -->
+	<div id="box">
+		<div><h1 style="text-align: center;">添加商品信息</h1></div>
+		<div style="margin: 10px 237px;">
+		所属类别：<select v-on:change="getPtext" v-model="oneText">
+				<option v-for="ones in List" >{{ones.text}}</option>
+			</select>
+			<select v-on:change="getTtext" v-model="twoText">
+				<option v-for="twos in getSumble" >{{twos.text}}</option>
+			</select> 
+			<br>
+			商品名称：<input type="text" v-model="priceName"/>
+			&nbsp;&nbsp;&nbsp;会员价：<input type="text" v-model="priceVip"/>
+			商品数量：<input type="text" v-model="priceNumber"/>
+			<button v-on:click="addToList()">添加</button>
+			<button v-on:click="removeAll()">重置</button>
+			<div id="addShow"></div>
+		</div>
+	</div>
+	<script>
+		new Vue({
+			el:"#box",
+			data:{
+				priceName:"a",
+				priceVip:"12",
+				priceNumber:0,
+				oneText:"家用电器",
+				twoText:"电视机",
+				List:[{
+					text:"家用电器",
+					sumble:[
+						{text:"电视机"},
+						{text:"电冰箱"},
+						{text:"洗衣机"}]
+					},
+					{
+					text:"随身电器",
+					sumble:[
+						{text:"手机"},
+						{text:"电脑"},
+						{text:"电子手表"}
+					]
+				}]
+			},
+			methods:{
+				getPtext:function(e){
+					this.oneText = e.target.value;
+				},
+				getTtext:function(e){
+					this.twoText = e.target.value;
+				},
+				addToList:function(){
+					var addShow = document.getElementById("addShow");
+					addShow.innerHTML = this.oneText+this.twoText+this.priceName+this.priceVip+this.priceNumber
+				},
+				removeAll:function(){
+					var addShow = document.getElementById("addShow");
+					this.priceName="";
+					this.priceVip=0;
+					this.priceNumber=0;
+					addShow.innerHTML = ""
+				}
+			},
+			computed:{
+				getSumble:function(){
+					for (var i = 0; i < this.List.length; i++) {
+						if(this.List[i].text == this.oneText){
+							return this.List[i].sumble;
+						}
+					}
+				}
+			}
+		})
+	</script>
+	
+</body>
+</html>

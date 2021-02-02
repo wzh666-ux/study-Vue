@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<title>表单控件绑定练习</title>
+	<script type="text/javascript" src="JS/vue.js"></script>
+</head>
+<body>
+	
+	<!-- 搜索框DEMO -->
+	<!-- <div id="box">
+		<input type="text" placeholder="输入文本自动搜索图书" v-model="searchBookname"/>
+		<div v-show="item" v-for="item in searchBookSrc">{{item}}</div>
+	</div>
+	<script>
+		new Vue({
+			el:"#box",
+			data:{
+				searchBookname:"",
+				searchBookSrc:[],
+				books:[
+					{bookname:"零基础学javascript"},
+					{bookname:"零基础学html5+css3"},
+					{bookname:"零基础学c语言"},
+					{bookname:"javascript精彩编程200例"},
+					{bookname:"javascript精彩编程300例"},
+					{bookname:"java精彩编程200例"},
+					{bookname:"aaa"},
+					]
+			},
+			watch:{
+				searchBookname:function(val){
+					if(val !== ""){
+						if(val == "all"){
+							for (var i = 0; i < this.books.length; i++) {
+								this.searchBookSrc[i] = this.books[i].bookname;
+							}
+						}else{
+							for (var i = 0; i < this.books.length; i++) {
+								if(this.searchBookname == this.books[i].bookname.substr(0,this.searchBookname.length)){
+									this.searchBookSrc[i] = this.books[i].bookname;
+								}else{
+									this.searchBookSrc[i] = false;
+								}
+							}
+						}
+					}else{
+						for (var i = 0; i < this.books.length; i++) {
+							this.searchBookSrc[i] = false;
+						}
+					}
+				}
+			}
+		})
+	</script> -->
+	
+	<!-- 职位选择DEMO -->
+	<!-- <div id="box1">
+		<span>可选职位&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+		<span>已选职位</span><br />
+		<select multiple="multiple" v-model="readyCheck">
+			<option v-for="item in canCheck" >{{item}}</option>
+		</select>
+		
+		<input id="add" type="button" value=">>" v-on:click="addToAC()">
+		<input id="push" type="button" value="<<" v-on:click="removeToAC()">
+		<select style="position: absolute;margin-left: 31px;" multiple="multiple" v-model="readyCheck">
+			<option v-for="item in toCheck">{{item}}</option>
+		</select>
+	</div>
+	<style>
+		#box1{
+			position: relative;
+		}
+		#box1 #add{
+			position: absolute;
+			top: 35px;
+		}
+		#box1 #push{
+			position: absolute;
+			top: 65px;
+		}
+	</style>
+	<script>
+		new Vue({
+			el:"#box1",
+			data:{
+				canCheck:["演员","教师","歌手","公务员","公司职员","酒店管理"],
+				readyCheck:[],
+				toCheck:[]
+			},
+			methods:{
+				addToAC:function(){
+					for (var i = 0; i < this.readyCheck.length; i++) {
+						for(var k = 0;k< this.canCheck.length;k++){
+							if(this.readyCheck[i] == this.canCheck[k]){
+								this.toCheck.push(this.readyCheck[i]);
+								/* 移除选中的数组元素 */
+								var removeCancheck = this.canCheck[k];
+								this.canCheck = this.canCheck.filter(function(item){
+									return item != removeCancheck; 
+								})
+							}
+						}
+					}
+				},
+				removeToAC:function(){
+					for (var i = 0; i < this.readyCheck.length; i++) {
+						for(var k = 0;k< this.toCheck.length;k++){
+							if(this.readyCheck[i] == this.toCheck[k]){
+								this.canCheck.push(this.readyCheck[i]);
+								/* 移除选中的数组元素 */
+								var removeCancheck = this.toCheck[k];
+								this.toCheck = this.toCheck.filter(function(item){
+									return item != removeCancheck; 
+								})
+							}
+						}
+					}
+				}
+			}
+		})
+	</script> -->
+	
+	<!-- 三级联动下拉列表DEMO -->
+	<div id="box2">
+		三级联动下拉列表：<br />
+		<select v-model="oneM"  v-on:click="isShow()">
+			<option>请选择</option>
+			<option v-for="oneItem in oneList">{{oneItem}}</option>
+		</select>
+		<select v-model="twoM" v-show="show">
+			<option>请选择</option>
+			<option v-for="twoItem in one(oneM)">{{twoItem}}</option>
+		</select>
+		<select v-show="show">
+			<option>请选择</option>
+			<option v-for="threeItem in two(twoM)">{{threeItem}}</option>
+		</select>
+	</div>
+	<script>
+		new Vue({
+			el:"#box2",
+			data:{
+				oneM:"请选择",
+				twoM:"请选择",
+				threeM:"请选择",
+				show:false,
+				oneList:[
+					"福建省",
+					"广西省",
+					"河北省"
+					],
+				twoList:{
+					"福建省":["厦门市"],
+					"广西省":["南宁市","桂林市"],
+					"河北省":["北京市","天津市"]
+					},
+				threeList:{
+					"厦门市":["海沧区","集美区","同安区"],
+					"南宁市":["青秀区","朝阳区"],
+					"桂林市":["朝一区","朝二区"],
+					"天津市":["天一区","天二区"],
+					"北京市":["北一区","北二区"]
+					}
+			},
+			methods:{
+				isShow:function(){
+					return this.show = true;
+				},
+				one:function(value){
+					return this.twoList[value]
+				},
+				two:function(value){
+					return this.threeList[value]
+				}
+			}
+		})
+	</script>
+	
+</body>
+</html>

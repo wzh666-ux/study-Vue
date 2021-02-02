@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<title>组件_混入练习</title>
+	<script type="text/javascript" src="JS/vue.js"></script>
+</head>
+<body>
+	<!-- 基础混入用法 -->
+	<!-- <div id="box">
+		<mycomponent></mycomponent>
+	</div>
+	<script>
+		var myMixin = {
+			created:function(){
+				this.show()
+			},
+			methods:{
+				show:function(){
+					document.write("VUE.js的混入")
+				}
+			}
+		}
+		var comPo = {
+			mixins:[myMixin],
+			template:`<div>
+				helloworld Vue component!
+			</div>`
+		}
+		var vm = new Vue({
+			el:"#box",
+			components:{
+				'mycomponent':comPo
+			}
+		})
+	</script> -->
+	
+	<!-- 混入规则：
+		 1.选项合并当混入对象包含和组件同名时，在和组件的数据发生冲突时以组件数据优先。
+		 2.如果是同名钩子函数，那将都混合为一个数组，因此都会被调用，但是混入对象的钩
+		 子将在组件自身的钩子之前调用。
+		 3.如果是值为对象的选项，例如：methods,components，将被合并到要混入的组件对
+		 象上。如果两个对象的键名冲突，则取组件对象的键值对。
+	 -->
+	 
+	<!-- 全局混入：使用全局混入一定要谨慎，在大多数情况下，全局混入只应用于自定义选项 -->
+	<!-- <div id="box">
+		<mycomponent></mycomponent>
+	</div>
+	<script>
+		Vue.mixin({
+			created:function(){
+				var myOption = this.$options.myOption;
+				if(myOption){
+					document.write(myOption);
+				}
+			}
+		})
+		
+		// var comPo = {
+		// 	myOption:'自定义选项'
+		// }
+		
+		var vm = new Vue({
+			el:"#box",
+			myOption:'自定义选项',
+			// components:{
+			// 	'mycomponent':comPo
+			// }
+		})
+	</script> -->
+	
+</body>
+</html>

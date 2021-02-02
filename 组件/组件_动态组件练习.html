@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<title>动态组件练习</title>
+	<script type="text/javascript" src="JS/vue.js"></script>
+</head>
+<body>
+	
+	<!-- 动态组件的基础用法 -->
+	<!-- <div id="box">
+		<ul>
+			<li :style="willClick" v-on:click="active='music'">音乐</li>
+			<li :style="willClick" v-on:click="active='videos'">视频</li>
+			<li :style="willClick" v-on:click="active='news'">新闻</li>
+		</ul>
+		<component :is="active"></component>
+	</div>
+	<script>
+		var vm = new Vue({
+			el:"#box",
+			data:{
+				active:'music',
+				willClick:{
+					cursor:'pointer'
+				}
+			},
+			components:{
+				music:{
+					template:'<div>音乐内容</div>'
+				},
+				videos:{
+					template:'<div>视频内容</div>'
+				},
+				news:{
+					template:'<div>新闻内容</div>'
+				}
+			}
+		})
+	</script> -->
+	
+	<!-- <keep-alive>元素实现组件的缓存效果 -->
+	<!-- <div id="box">
+		<ul>
+			<li :style="willClick" v-on:click="active='music'">音乐</li>
+			<li :style="willClick" v-on:click="active='videos'">视频</li>
+			<li :style="willClick" v-on:click="active='news'">新闻</li>
+		</ul>
+		<keep-alive>
+			<component :is="active" v-bind="willClick"></component>
+		</keep-alive>
+	</div>
+	<script>
+		var vm = new Vue({
+			el:"#box",
+			data:{
+				active:'music',
+				willClick:{
+					cursor:'pointer',
+					childstyle:{
+						cursor:'pointer',
+						color:'#FF0000'
+					}
+				}
+			},
+			components:{
+				music:{
+					props:['childstyle'],
+					data:function(){
+						return {
+							active1:'musicLX'
+						}
+					},
+					template:`
+					<div>
+						<div>
+							<ul>
+								<li :style="childstyle" v-on:click="active1='musicLX'">流行音乐</li>
+								<li :style="childstyle" v-on:click="active1='musicMZ'">民族音乐</li>
+								<li :style="childstyle" v-on:click="active1='musicGD'">古典音乐</li>
+							</ul>
+						</div>
+						<component :is="active1"></component>
+					</div>`,
+					components:{
+						musicLX:{
+							template:`<div>流行音乐内容</div>`
+						},
+						musicMZ:{
+							template:`<div>民族音乐内容</div>`
+						},
+						musicGD:{
+							template:`<div>古典音乐内容</div>`
+						}
+					}
+				},
+				videos:{
+					template:'<div>视频内容</div>'
+				},
+				news:{
+					template:'<div>新闻内容</div>'
+				}
+			}
+		})
+	</script> -->
+</body>
+</html>

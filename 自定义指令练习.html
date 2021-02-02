@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<title>自定义指令练习</title>
+	<script type="text/javascript" src="JS/vue.js"></script>
+</head>
+<body>
+	<!-- 自定义指令基础用法 -->
+	<!-- <div id="boxs">
+		<input v-focus>
+	</div>
+	<script>
+		// 注册一个全局自定义指令 `v-focus`
+		Vue.directive('focus', {
+		  // 当被绑定的元素插入到 DOM 中时……
+		  inserted: function (el) {
+		    // 聚焦元素
+			el.focus() 
+		  }
+		})
+		new Vue({ 
+			el:"#boxs",
+			//注册局部指令v-addborder
+			// directives:{
+			// 	addborder:{
+			// 		inserted:function(el){ 
+			// 			el.focus()
+			// 		}
+			// 	}
+			// }
+		})
+	</script> -->
+	
+	<!-- 自定义指令中属性updata钩子函数的练习 -->
+	<!-- <div id="box">
+		边框宽度：<input v-model="borderWidth"/>
+		<div  style="width: 200px;height: 200px;" v-getborder="borderWidth"></div>
+	</div>
+	<script>
+		new Vue({
+			el:"#box",
+			data:{
+				borderWidth:0
+			},
+			directives:{
+				getborder:{
+					update:function(el,binding){
+						el.style.border = `${binding.value}px solid red`
+					}
+				}
+			}
+		})
+	</script> -->
+	
+	<!-- 自己随便写的 -->
+	<!-- <div id="box">
+		<div id="moveBox" v-drago="mouseLocal"></div>
+	</div>
+	<style>
+		#moveBox{
+			position: absolute;
+			width: 200px;
+			height: 200px;
+			background-color: red;
+		}
+	</style>
+	<script>
+		var vm = new Vue({
+			el:"#box",
+			data:{
+				mouseLocal:{
+					mouseX:0,
+					mouseY:0
+				}
+			},
+			directives:{
+				drago:{
+					inserted:function(el,binding){
+						el.style.left = binding.value.mouseX;
+						el.style.top = binding.value.mouseY;
+						var sX;
+						var sY;
+						el.onmousedown = function(e){
+							sX = e.clientX - vm.mouseLocal.mouseX;
+							sY = e.clientY - vm.mouseLocal.mouseY;
+							onmousemove = function(e){
+								vm.mouseLocal.mouseX = e.clientX - sX;
+								vm.mouseLocal.mouseY = e.clientY - sY;
+								console.log("拖动中")
+							}
+							el.onmouseup = function(){
+								console.log("拖动结束")
+								onmousemove = null
+							}
+						}
+					},
+					update:function(el,binding){
+						el.style.left = `${binding.value.mouseX}px`;
+						el.style.top = `${binding.value.mouseY}px`;
+					}
+				}
+			}
+		})
+	</script> -->
+</body>
+</html>

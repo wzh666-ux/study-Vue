@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<title>监听属性练习</title>
+	<script type="text/javascript" src="JS/vue.js"></script>
+</head>
+<body> 
+<div id="box">
+	￥:<input type="number" v-model="R"/><p>
+	$:<input type="number" v-model="D"/><p>
+	{{R|formNumber}}人民币={{D|formNumber}}美元
+</div>
+
+<script>
+	var vm = new Vue({
+		el:"#box",
+		data:{
+			R:0,
+			D:0,
+			rate:6.8
+		},
+		watch:{
+			R:function(val){
+				this.D = val / this.rate;
+			},
+			D:function(val){
+				this.R = val * this.rate;
+			}
+		},
+		filters:{
+			formNumber:function(val){
+				return val.toFixed(2);
+			}
+		}
+	})
+</script>
+	
+</body>
+</html>

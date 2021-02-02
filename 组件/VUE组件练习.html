@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<title>VUE组件练习</title>
+	<script type="text/javascript" src="JS/vue.js"></script>
+</head>
+<body>
+	<!-- 父组件向子组件传值 -->
+	<div id="box">
+		<lisson v-bind="allDate"></lisson>
+	</div>
+	<script>
+		// var myComp = Vue.extend({
+		// 	template:'<h2>注册全局组件</h2>' 
+		// })
+		// Vue.component('lisson',myComp)
+		var myComp = {
+			props:['title','massage'],
+			// data:function(){
+			// 	return {
+			// 		title:"我是传奇",
+			// 		massage:"末世科幻动作电影"
+			// 	}
+			// },
+			template:
+				'<div>\
+					<div style="width: 200px;height: 200px;background-color: #FF0000;"></div>\
+					<h3>{{title}}</h3>\
+					<h5>{{massage}}</h5>\
+				</div>',
+			}
+		var vm = new Vue({
+			el:"#box",
+			data:{
+				allDate:{
+					title:"我是传奇",
+					massage:"末世科幻动作电影"
+				}
+			},
+			components:{
+				'lisson':myComp
+			}
+		})
+	</script>
+	
+	<!-- $emit()方法的使用(在子组件中调用父组件的自定义监听函数) -->
+	<!-- <div id="box">
+		<div :style="{fontSize:startbig + 'px'}">
+			<tobig :text="text" v-on:big="bigs($event)"></tobig>
+		</div>
+	</div>
+	<script>
+		var comPo = {
+			props:['text'],
+			template:
+				`<div>
+				<button v-on:click="active(15)">放大</button>
+				<p>{{text}}</p>
+				</div>
+				`,
+			methods:{
+				active:function(val){
+					this.$emit('big',val)
+				}
+			}
+		}
+		new Vue({
+			el:'#box',
+			data:{
+				text:'这行字将被放大',
+				startbig:13
+			},
+			methods:{
+				bigs:function(val){
+					return this.startbig += val;
+				}
+			},
+			components:{
+				'tobig':comPo
+			}
+		})
+	</script> -->
+	
+	<!-- 组件原生方法调用(*.native) -->
+	<!-- <div id="box">
+		<boxborder v-on:click.native="a($event)"></boxborder>
+	</div>
+	<script>
+		var comPo = {
+			data:function(){
+				return {
+					s:{
+						e:1
+					}
+				}
+			},
+			template:`<div v-on:click="b(s)"  style="width: 200px;height: 200px;background-color: #000000;"></div>`,
+			methods:{
+				b:function(value){
+					// console.log("子元素方法")
+					this.$emit('click',value)
+				}
+			}
+		}
+		Vue.component('boxborder',comPo);
+		new Vue({
+			el:"#box",
+			data:{
+				
+			},
+			/* components:{
+				'boxborder':comPo
+			}, */
+			methods:{
+				a:function(value){
+					console.log(value.e)
+					// console.log("父元素方法")
+				}
+			}
+		})
+	</script> -->
+	
+	
+</body>
+</html>

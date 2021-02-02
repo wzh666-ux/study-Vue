@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>条件判断练习</title>
+    <script type="text/javascript" src="JS/vue.js"></script>
+</head>
+<body>
+    <!-- 通过V-SHOW指令来控制DOM元素的显示 -->
+    <div id="box">
+        <input type="button" :value="bText" v-on:click="activeShow()">
+        <div v-show="show">
+            <div>这些文本同过V-show指令显示！</div>
+        </div>
+    </div>
+    <script>
+        var vm = new Vue({
+            el:'#box',
+            data:{
+                bText:"显示文本",
+                show:false
+            },
+            methods:{
+                activeShow:function(){
+                    this.bText == "显示文本" ? this.bText = "隐藏文本" :this.bText = "显示文本"
+                    this.show = !this.show;
+                }
+            }
+        })
+    </script>
+    <!-- 通过V-IF指令来控制DOM元素的显示 -->
+    <div id="box1">
+        <input type="button" :value="bText1" v-on:click="activeTemplate()">
+        <template v-if="show1">
+            <input type="radio" value="A">A
+            <input type="radio" value="B">B
+            <input type="radio" value="C">C
+            <input type="radio" value="D">D
+        </template>
+    </div>
+    <script>
+        var vm1 = new Vue({
+            el:'#box1',
+            data:{
+                show1:true,
+                bText1:"隐藏按钮组" 
+            },
+            methods:{
+                activeTemplate:function(){
+                    this.bText1 == "隐藏按钮组"?this.bText1 = "显示按钮组":this.bText1 = "隐藏按钮组";
+                    this.show1 = !this.show1;
+                }
+            }
+        })
+    </script>
+    
+</body>
+</html>
